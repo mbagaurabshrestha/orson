@@ -1,0 +1,7 @@
+import { NextResponse } from "next/server";
+
+export async function GET() {
+    const response = NextResponse.redirect(new URL("/", process.env.DOMAIN!));
+    response.cookies.set("token", "", { httpOnly: true, expires: new Date(0) });
+    return response;
+}
