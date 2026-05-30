@@ -35,55 +35,24 @@ export default function Login() {
 
     return (
         <div
-            style={{
-                fontFamily:
-                    "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                minHeight: "100vh",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#fff",
-                padding: "2rem",
-            }}
+            className="font-sans bg-white min-h-screen flex items-center justify-center text-black p-8"
         >
             {/* Glass Card */}
             <div
-                style={{
-                    width: "100%",
-                    maxWidth: "420px",
-                    background: "rgba(255,255,255,0.1)",
-                    backdropFilter: "blur(12px)",
-                    border: "1px solid rgba(255,255,255,0.2)",
-                    borderRadius: "16px",
-                    padding: "2.5rem",
-                    boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
-                }}
+                className="w-full max-w-105 bg-gray-100 backdrop-blur-md border border-gray-200 rounded-2xl p-10 shadow-[0_20px_40px_rgba(0,0,0,0.2)]"
             >
                 <h1
-                    style={{
-                        fontSize: "1.8rem",
-                        fontWeight: 700,
-                        marginBottom: "0.5rem",
-                        textAlign: "center",
-                    }}
+                    className="text-[1.8rem] font-bold mb-2 text-center"
                 >
                     {loading ? "Processing..." : "Admin Login"}
                 </h1>
 
-                <p
-                    style={{
-                        textAlign: "center",
-                        fontSize: "13px",
-                        color: "rgba(255,255,255,0.6)",
-                        marginBottom: "2rem",
-                    }}
-                >
+                <p className="text-center text-[13px] text-black mb-8">
                     Welcome back, please sign in
                 </p>
 
                 {/* Username */}
-                <label style={{ fontSize: "13px", color: "rgba(255,255,255,0.8)" }}>
+                <label className="text-[13px] text-black">
                     Username
                 </label>
                 <input
@@ -93,21 +62,11 @@ export default function Login() {
                     onChange={(e) =>
                         setUser({ ...user, username: e.target.value })
                     }
-                    style={{
-                        width: "100%",
-                        padding: "12px",
-                        marginTop: "6px",
-                        marginBottom: "16px",
-                        borderRadius: "10px",
-                        border: "1px solid rgba(255,255,255,0.2)",
-                        background: "rgba(255,255,255,0.08)",
-                        color: "#fff",
-                        outline: "none",
-                    }}
+                    className="w-full p-3 mt-2 mb-4 rounded-[10px] border border-gray-300 bg-white/8 color-black outline-none"
                 />
 
                 {/* Password */}
-                <label style={{ fontSize: "13px", color: "rgba(255,255,255,0.8)" }}>
+                <label className="text-[13px] text-black">
                     Password
                 </label>
                 <input
@@ -117,36 +76,18 @@ export default function Login() {
                     onChange={(e) =>
                         setUser({ ...user, password: e.target.value })
                     }
-                    style={{
-                        width: "100%",
-                        padding: "12px",
-                        marginTop: "6px",
-                        marginBottom: "20px",
-                        borderRadius: "10px",
-                        border: "1px solid rgba(255,255,255,0.2)",
-                        background: "rgba(255,255,255,0.08)",
-                        color: "#fff",
-                        outline: "none",
-                    }}
+                    className="w-full p-3 mt-1.5 mb-5 rounded-[10px] border border-gray-300 bg-white/8 color-black outline-none"
                 />
 
                 {/* Button */}
                 <button
                     onClick={onLogin}
                     disabled={buttonDisabled}
-                    style={{
-                        width: "100%",
-                        padding: "12px",
-                        borderRadius: "10px",
-                        border: "none",
-                        cursor: buttonDisabled ? "not-allowed" : "pointer",
-                        background: buttonDisabled
-                            ? "rgba(255,255,255,0.2)"
-                            : "linear-gradient(90deg, #4f46e5, #7c3aed)",
-                        color: "#fff",
-                        fontWeight: 600,
-                        transition: "0.3s",
-                    }}
+                    className={`w-full p-3 rounded-[10px] text-white active:scale-95 transition-transform duration-500 font-semibold ${
+  buttonDisabled 
+    ? "cursor-not-allowed bg-blue-500" 
+    : "cursor-pointer bg-linear-to-r from-[#4f46e5] to-[#7c3aed]"
+}`}
                 >
                     {loading ? "Logging in..." : "Login"}
                 </button>

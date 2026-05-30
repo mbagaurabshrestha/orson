@@ -17,80 +17,56 @@ export default async function BlogsPage() {
   const blogs = await getBlogs();
 
   return (
-    <div style={{
-      fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-      minHeight: "100vh",
-      color: "#fff",
-    }}>
+    <div className="font-sans bg-white min-h-screen text-black">
 
       {/* Navbar */}
-      <nav style={{
-        position: "sticky", top: 0, zIndex: 100,
-        background: "rgba(102, 126, 234, 0.15)",
-        backdropFilter: "blur(12px)",
-        borderBottom: "1px solid rgba(255,255,255,0.15)",
-        padding: "0 2rem",
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        height: "64px",
-      }}>
-        <Link href="/" style={{ textDecoration: "none" }}>
+      <nav className="sticky top-0 z-100 bg-white backdrop-blur-md border-b shadow-lg border-gray-200 px-8 flex items-center justify-between h-16">
+        <Link href="/" className="no-underline">
           <div>
             <Image className="rounded-full" src="/logo.png" alt="Logo" width={32} height={32} style={{ display: "inline-block", marginRight: "8px" }} />
-            <span style={{ fontSize: "18px", fontWeight: "600", letterSpacing: "0.5px", color: "#fff" }}>
+            <span className="text-[18px] font-semibold tracking-[0.5px] text-black">
             Orson Infotech
           </span>
           </div>
         </Link>
-        <Link href="/" style={{ color: "rgba(255,255,255,0.8)", fontSize: "14px", textDecoration: "none" }}>
+        <Link href="/" className="text-white text-sm font-semibold text-[14px] no-underline inline-block py-2 px-4 rounded-lg bg-blue-500 hover:scale-102 transition-transform duration-200 active:scale-95 hover:bg-blue-600">
           ← Back to Home
         </Link>
       </nav>
 
       {/* Header */}
-      <section style={{ padding: "4rem 2rem 2rem", textAlign: "center" }}>
-        <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "13px", letterSpacing: "2px", textTransform: "uppercase", marginBottom: "1rem" }}>
+      <section className="pt-16 px-8 pb-8 text-center">
+        <p className="text-black text-[13px] tracking-[2px] uppercase mb-4">
           Stay Updated
         </p>
-        <h1 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: "700", color: "#fff", marginBottom: "1rem" }}>
+        <h1 className="text-[clamp(2rem,4vw,3rem)] font-bold text-black mb-4">
           All Blog Posts
         </h1>
-        <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "15px" }}>
+        <p className="text-black text-[15px]">
           {blogs.length} {blogs.length === 1 ? "post" : "posts"} published
         </p>
       </section>
 
       {/* Blog Grid */}
-      <section style={{ padding: "2rem 2rem 6rem" }}>
-        <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
+      <section className="pt-8 px-8 pb-24">
+        <div className="max-w-250 mx-auto">
           {blogs.length === 0 ? (
-            <div style={{ textAlign: "center", padding: "4rem", color: "rgba(255,255,255,0.5)", fontSize: "15px" }}>
+            <div className="text-center p-16 text-black text-[15px]">
               No blog posts yet. Check back soon!
             </div>
           ) : (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
               {blogs.map((post: any) => (
-                <div key={post._id} style={{
-                  padding: "1.75rem", borderRadius: "12px",
-                  border: "1px solid rgba(255,255,255,0.15)",
-                  background: "rgba(255,255,255,0.08)",
-                }}>
-                  <span style={{
-                    fontSize: "11px", letterSpacing: "1px", textTransform: "uppercase",
-                    color: "#fff", background: "rgba(255,255,255,0.2)",
-                    padding: "3px 10px", borderRadius: "20px",
-                  }}>{post.tag}</span>
-                  <h3 style={{ fontSize: "1rem", fontWeight: "500", color: "#fff", margin: "1rem 0 0.75rem", lineHeight: "1.5" }}>
+                <div key={post._id} className="hover:scale-103 transition-transform duration-500 hover:shadow-lg p-7 rounded-lg border border-gray-300 bg-gray-100 shadow">
+                  <span className="text-[11px] tracking-[1px] uppercase text-black bg-gray-200 px-2.5 py-0.75 rounded-md font-semibold">{post.tag}</span>
+                  <h3 className="text-base font-medium text-black mt-4 mb-3 leading-normal">
                     {post.title}
                   </h3>
-                  <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.65)", lineHeight: "1.7", marginBottom: "0.75rem" }}>
+                  <p className="text-[14px] text-gray-600 leading-[1.7] mb-3">
                     {post.content.slice(0, 120)}...
                   </p>
-                  <Link href={`/blog/${post.slug}`} style={{
-                    color: "#fff", fontSize: "13px", fontWeight: "600",
-                    textDecoration: "underline", textUnderlineOffset: "3px", opacity: 0.85,
-                  }}>
-                    Read More →
+                  <Link href={`/blog/${post.slug}`} className="text-[13px] font-semibold text-white  underline-offset-[3px] opacity-85 bg-blue-500 px-2 py-1 rounded-full active:scale-95 transition-transform duration-500 hover:scale-105 hover:bg-blue-800">
+                    <span className="inline-block hover:scale-105 transition-transform duration-500">Read More →</span>
                   </Link>
                   <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.5)", marginTop: "0.75rem" }}>{post.date}</p>
                 </div>
@@ -101,12 +77,70 @@ export default async function BlogsPage() {
       </section>
 
       {/* Footer */}
-      <footer style={{
-        padding: "2rem", textAlign: "center",
-        borderTop: "1px solid rgba(255,255,255,0.15)",
-      }}>
-        <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)" }}>© 2025 Orson Infotech. All rights reserved.</p>
-      </footer>
+      <footer className="bg-gray-100 text-gray-600 border-t border-gray-100">
+  {/* Top Section: Links & Info */}
+  <div className="max-w-6xl mx-auto px-6 py-12 md:py-16 grid grid-cols-1 md:grid-cols-4 gap-8">
+    
+    {/* Column 1: Brand/About */}
+    <div className="md:col-span-1">
+      <span className="text-lg font-bold text-gray-900 tracking-tight">
+        Orson <span className="text-blue-600">Infotech</span>
+      </span>
+      <p className="mt-4 text-[14px] leading-relaxed text-gray-500">
+        Building digital experiences that matter. Custom software, mobile apps, and premium web development solutions.
+      </p>
+    </div>
+
+    {/* Column 2: Quick Links */}
+    <div>
+      <h4 className="text-[13px] font-semibold text-gray-900 uppercase tracking-wider mb-4">
+        Company
+      </h4>
+      <ul className="space-y-2.5 text-[14px]">
+        <li><a href="#services" className="hover:text-blue-600 transition-colors">Services</a></li>
+        <li><a href="#training" className="hover:text-blue-600 transition-colors">Training</a></li>
+        <li><a href="#blogs" className="hover:text-blue-600 transition-colors">Our Blog</a></li>
+      </ul>
+    </div>
+
+    {/* Column 3: Contact/Support */}
+    <div>
+      <h4 className="text-[13px] font-semibold text-gray-900 uppercase tracking-wider mb-4">
+        Connect
+      </h4>
+      <ul className="space-y-2.5 text-[14px]">
+        <li>
+          <a href="mailto:infotech.orson@gmail.com" className="hover:text-blue-600 transition-colors break-all">
+            infotech.orson@gmail.com
+          </a>
+        </li>
+        <li><a href="#contact" className="hover:text-blue-600 transition-colors">Get in Touch</a></li>
+      </ul>
+    </div>
+
+    {/* Column 4: Newsletter or Subtext */}
+    <div>
+      <h4 className="text-[13px] font-semibold text-gray-900 uppercase tracking-wider mb-4">
+        Our Mission
+      </h4>
+      <p className="text-[14px] leading-relaxed text-gray-500">
+        Empowering businesses and students through cutting-edge technology and tailored engineering bootcamps.
+      </p>
+    </div>
+
+  </div>
+
+  {/* Bottom Section: Copyright */}
+  <div className="border-t border-gray-100 shadow bg-gray-100">
+    <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[13px] text-gray-500">
+      <p>© {new Date().getFullYear()} Orson Infotech. All rights reserved.</p>
+      <div className="flex gap-6">
+        <a href="#privacy" className="hover:text-gray-900 transition-colors">Privacy Policy</a>
+        <a href="#terms" className="hover:text-gray-900 transition-colors">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
     </div>
   );

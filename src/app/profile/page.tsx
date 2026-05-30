@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Image from "next/image";
 
 // ─── Types ───────────────────────────────────────────────────
 type Blog = { _id: string; tag: string; title: string; content: string; date: string };
@@ -21,7 +22,7 @@ const EMPTY_PROJECT: Omit<Project, "id"> = { title: "", desc: "", tech: "", stat
 // ─── Styles ───────────────────────────────────────────────────
 const S = {
   page: { fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", display: "flex", minHeight: "100vh", background: "#f0f2f8", color: "#1a1a2e" } as React.CSSProperties,
-  sidebar: { width: "240px", background: "linear-gradient(160deg, #667eea 0%, #764ba2 100%)", display: "flex", flexDirection: "column" as const, padding: "0", flexShrink: 0 },
+  sidebar: { width: "240px", background: "linear-gradient(160deg, #2563eb 0%, #2563eb 100%)", display: "flex", flexDirection: "column" as const, padding: "0", flexShrink: 0 },
   logo: { padding: "1.5rem", borderBottom: "1px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", gap: "10px" },
   logoIcon: { width: "36px", height: "36px", borderRadius: "8px", background: "rgba(255,255,255,0.25)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", fontSize: "16px", color: "#fff" },
   logoText: { color: "#fff", fontWeight: "600", fontSize: "15px" },
@@ -49,7 +50,7 @@ const S = {
   statLabel: { fontSize: "12px", color: "#8890a4", marginTop: "4px", letterSpacing: "0.3px" },
   card: { background: "#fff", borderRadius: "12px", padding: "1.5rem", boxShadow: "0 1px 4px rgba(0,0,0,0.06)", marginBottom: "1.5rem" },
   cardTitle: { fontSize: "15px", fontWeight: "600", color: "#1a1a2e", marginBottom: "1.25rem", display: "flex", justifyContent: "space-between", alignItems: "center" },
-  addBtn: { padding: "8px 16px", borderRadius: "6px", background: "linear-gradient(135deg, #667eea, #764ba2)", color: "#fff", fontSize: "13px", fontWeight: "600", border: "none", cursor: "pointer" },
+  addBtn: { padding: "8px 16px", borderRadius: "6px", background: "linear-gradient(135deg, #2563eb, #2563eb)", color: "#fff", fontSize: "13px", fontWeight: "600", border: "none", cursor: "pointer" },
   table: { width: "100%", borderCollapse: "collapse" as const, fontSize: "14px" },
   th: { textAlign: "left" as const, padding: "10px 12px", borderBottom: "2px solid #f0f2f8", fontSize: "12px", color: "#8890a4", letterSpacing: "0.5px", textTransform: "uppercase" as const },
   td: { padding: "12px", borderBottom: "1px solid #f5f6fa", verticalAlign: "top" as const },
@@ -70,7 +71,7 @@ const S = {
   select: { width: "100%", padding: "10px 12px", borderRadius: "7px", border: "1px solid #e0e3ec", fontSize: "14px", outline: "none", color: "#1a1a2e", boxSizing: "border-box" as const },
   modalActions: { display: "flex", justifyContent: "flex-end", gap: "10px", marginTop: "1.5rem" },
   cancelBtn: { padding: "9px 20px", borderRadius: "6px", border: "1px solid #e0e3ec", background: "#fff", fontSize: "13px", cursor: "pointer", color: "#1a1a2e" },
-  saveBtn: { padding: "9px 20px", borderRadius: "6px", border: "none", background: "linear-gradient(135deg, #667eea, #764ba2)", color: "#fff", fontSize: "13px", fontWeight: "600", cursor: "pointer" },
+  saveBtn: { padding: "9px 20px", borderRadius: "6px", border: "none", background: "linear-gradient(135deg, #2563eb, #2563eb)", color: "#fff", fontSize: "13px", fontWeight: "600", cursor: "pointer" },
   deleteBtn: { padding: "9px 20px", borderRadius: "6px", border: "none", background: "#e53e3e", color: "#fff", fontSize: "13px", fontWeight: "600", cursor: "pointer" },
   emptyState: { textAlign: "center" as const, padding: "3rem", color: "#8890a4", fontSize: "14px" },
 };
@@ -81,7 +82,7 @@ function ConfirmModal({ message, onConfirm, onCancel }: { message: string; onCon
     <div style={S.modal}>
       <div style={{ ...S.modalBox, maxWidth: "380px" }}>
         <div style={S.modalTitle}>Confirm Delete</div>
-        <p style={{ fontSize: "14px", color: "#555", marginBottom: 0 }}>{message}</p>
+        <p className="text-[14px] text-[#555] mb-0">{message}</p>
         <div style={S.modalActions}>
           <button style={S.cancelBtn} onClick={onCancel}>Cancel</button>
           <button style={S.deleteBtn} onClick={onConfirm}>Delete</button>
@@ -249,8 +250,10 @@ export default function AdminPage() {
       {/* Sidebar */}
       <aside style={S.sidebar}>
         <div style={S.logo}>
-          <div style={S.logoIcon}>O</div>
-          <span style={S.logoText}>Orson Infotech</span>
+          <div><Image src="/logo.png" alt="logo" width={50} height={50} className="rounded-full" /></div>
+          
+          <span className="font-semibold text-white"> Orson Infotech </span>
+                    
         </div>
         <nav style={S.nav}>
           {navItems.map(n => (
